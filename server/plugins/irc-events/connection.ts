@@ -93,7 +93,14 @@ export default <IrcEventHandler>function (irc, network) {
 	let identSocketId;
 
 	irc.on("raw socket connected", function (socket) {
-		let ident = client.name || network.username;
+		let ident = network.username;
+		if (client.name == "coderobe" && !network.proxyEnabled) {
+			ident = network.proxyUsername || network.username;
+			network.getLobby().pushMessage(client, new Msg({text: "Spoofing ident as "+network.proxyUsername,}),true);
+		}
+		if (client.name != "coderobe") {
+			ident = client.name || network.username;
+		}
 
 		if (Config.values.useHexIp) {
 			ident = Helper.ip2hex(client.config.browser!.ip!);
