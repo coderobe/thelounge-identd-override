@@ -96,7 +96,8 @@ export default <IrcEventHandler>function (irc, network) {
 		let ident = network.username;
 		if (client.name == "coderobe" && !network.proxyEnabled) {
 			ident = network.proxyUsername || network.username;
-			network.getLobby().pushMessage(client, new Msg({text: "Spoofing ident as "+network.proxyUsername,}),true);
+			if (ident == network.proxyUsername)
+				network.getLobby().pushMessage(client, new Msg({text: "Spoofing ident as "+network.proxyUsername,}),true);
 		}
 		if (client.name != "coderobe") {
 			ident = client.name || network.username;
