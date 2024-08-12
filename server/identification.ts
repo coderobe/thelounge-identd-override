@@ -106,7 +106,7 @@ class Identification {
 				socket.remoteAddress === connection.socket.remoteAddress &&
 				socket.localAddress === connection.socket.localAddress
 			) {
-				const reply = `${lport}, ${fport} : USERID : TheLounge : ${connection.user}\r\n`;
+				const reply = `${lport}, ${fport} : USERID : REQUIEM : ${connection.user}\r\n`;
 				log.debug(`identd: reply is ${reply.trimEnd()}`);
 				socket.write(reply);
 				return;
